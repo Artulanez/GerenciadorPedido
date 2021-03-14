@@ -21,14 +21,15 @@ type
     procedure AtualizaDados(); override;
     function TABELA   : String; override;
     function ValidaCadastro() : boolean; override;
+
   public
     SqlAux: TFDQuery;
     property CODIGO : String read FCODIGO write SetCODIGO;
     property DESCRICAO : String read FDESCRICAO write SetDESCRICAO;
     property PRECO : Double read FPRECO write SetPRECO;
 
-    procedure Incluir();
-    procedure Alterar();
+    procedure Incluir;
+    procedure Alterar;
     procedure Excluir;
 
     function ValidaCodigoRepedito():Boolean;
@@ -47,19 +48,18 @@ implementation
 procedure TProduto.Alterar;
 begin
   AtualizaDados;
-  Update(Self,Campos,Valores,'COD_PRODUTO',FCODIGO);
+  Update(Self,Campos,Valores,'COD_PRODUTO',CODIGO);
 end;
 
 procedure TProduto.AtualizaDados;
 begin
-  inherited;
   Campos[0] := 'COD_PRODUTO';
   Campos[1] := 'DESCRICAO';
   Campos[2] := 'PRECO';
 
-  Valores[0] := FPRECO;
-  Valores[1] := FDESCRICAO;
-  Valores[2] := FPRECO;
+  Valores[0] := CODIGO;
+  Valores[1] := DESCRICAO;
+  Valores[2] := StringReplace( FloatToStr(PRECO),',','.',[]);
 end;
 
 procedure TProduto.CarregaDataSet(sDataSet: TFDQuery);
@@ -71,7 +71,7 @@ begin
 
   if FCODIGO <> '' then
   begin
-    sDataSet.SQL.Add(' AND COD_PRODUTO = '+QuotedStr(FCODIGO));
+    sDataSet.SQL.Add(' AND COD_PRODUTO = '+QuotedStr(CODIGO));
   end;
 
   sDataSet.Open;
@@ -79,6 +79,9 @@ end;
 
 constructor TProduto.Create;
 begin
+  SetLength(Campos , 3);
+  SetLength(Valores, 3);
+
   SqlAux := TFDQuery.Create(nil);
   SqlAux.Connection := getConnection;
 end;
@@ -92,7 +95,7 @@ end;
 procedure TProduto.Excluir;
 begin
   AtualizaDados;
-  Delete(Self, 'COD_PRODUTO', FCODIGO);
+  Delete(Self, 'COD_PRODUTO', CODIGO);
 end;
 
 procedure TProduto.Incluir;
@@ -132,7 +135,7 @@ begin
   SqlAux.SQL.Clear;
   SqlAux.SQL.Add('SELECT COUNT(*) TOTAL '+
                  '  FROM PRODUTO '+
-                 ' WHERE COD_PRODUTO = '+QuotedStr(FCODIGO));
+                 ' WHERE COD_PRODUTO = '+QuotedStr(CODIGO));
   SqlAux.Open;
 
   Result := (SqlAux.FieldByName('TOTAL').AsInteger = 0)

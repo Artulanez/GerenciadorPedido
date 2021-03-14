@@ -1,7 +1,8 @@
 inherited FrmCadPadrao: TFrmCadPadrao
+  BorderStyle = bsNone
   Caption = 'FrmCadPadrao'
-  ClientHeight = 445
-  ClientWidth = 711
+  ClientHeight = 484
+  ClientWidth = 727
   ExplicitWidth = 727
   ExplicitHeight = 484
   PixelsPerInch = 96
@@ -9,18 +10,20 @@ inherited FrmCadPadrao: TFrmCadPadrao
   object PanelBotoes: TPanel
     Left = 0
     Top = 0
-    Width = 711
+    Width = 727
     Height = 57
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 711
     object PanelSave: TPanel
-      Left = 550
+      Left = 566
       Top = 1
       Width = 80
       Height = 55
       Align = alRight
       ParentBackground = False
       TabOrder = 0
+      ExplicitLeft = 550
       object ImgAdd: TImage
         Left = 1
         Top = 1
@@ -145,13 +148,14 @@ inherited FrmCadPadrao: TFrmCadPadrao
       end
     end
     object PanelSair: TPanel
-      Left = 630
+      Left = 646
       Top = 1
       Width = 80
       Height = 55
       Align = alRight
       ParentBackground = False
       TabOrder = 1
+      ExplicitLeft = 630
       object ImgSair: TImage
         Left = 1
         Top = 1

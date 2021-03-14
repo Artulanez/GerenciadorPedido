@@ -10,8 +10,10 @@ inherited FrmCadProduto: TFrmCadProduto
   TextHeight = 13
   inherited PanelBotoes: TPanel
     Width = 526
+    ExplicitWidth = 526
     inherited PanelSave: TPanel
       Left = 365
+      ExplicitLeft = 365
       inherited ImgAdd: TImage
         OnMouseDown = ImgAddMouseDown
         OnMouseLeave = ImgAddMouseLeave
@@ -21,6 +23,7 @@ inherited FrmCadProduto: TFrmCadProduto
     end
     inherited PanelSair: TPanel
       Left = 445
+      ExplicitLeft = 445
       inherited ImgSair: TImage
         OnMouseDown = ImgAddMouseDown
         OnMouseLeave = ImgAddMouseLeave
@@ -36,9 +39,6 @@ inherited FrmCadProduto: TFrmCadProduto
     Height = 118
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 61
-    ExplicitWidth = 711
-    ExplicitHeight = 388
     object Label1: TLabel
       Left = 16
       Top = 24

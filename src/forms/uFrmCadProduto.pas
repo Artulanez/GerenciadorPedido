@@ -8,6 +8,7 @@ uses
   Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.StdCtrls;
 
 type
+
   TFrmCadProduto = class(TFrmCadPadrao)
     Panel1: TPanel;
     Label1: TLabel;
@@ -16,7 +17,6 @@ type
     edtCodigo: TEdit;
     edtDescricao: TEdit;
     edtPreco: TEdit;
-    procedure ImgAddClick(Sender: TObject);
     procedure ImgAddMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ImgAddMouseLeave(Sender: TObject);
@@ -25,13 +25,14 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ImgSairClick(Sender: TObject);
+    procedure ImgAddClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     Produto : TProduto;
 
-    //function  ValidaCadastro: Boolean; Virtual; Abstract;
+    function  ValidaCadastro: Boolean; Override;
     procedure SalvaCadastro; Override;
     procedure PreencheDados; Override;
   end;
@@ -59,8 +60,11 @@ end;
 
 procedure TFrmCadProduto.ImgAddClick(Sender: TObject);
 begin
+  Produto.CODIGO := edtCodigo.Text;
+  Produto.DESCRICAO := edtDescricao.Text;
+  Produto.PRECO := StrToFloatDef(edtPreco.Text,0);
+
   inherited;
-  TPanel(TImage(Sender).Parent).Color := $009F9F9F;
 end;
 
 procedure TFrmCadProduto.ImgAddMouseDown(Sender: TObject; Button: TMouseButton;
@@ -114,9 +118,6 @@ end;
 procedure TFrmCadProduto.SalvaCadastro;
 begin
   inherited;
-  Produto.CODIGO := edtCodigo.Text;
-  Produto.DESCRICAO := edtDescricao.Text;
-  Produto.PRECO := StrToFloat(edtPreco.Text);
 
   if Botao = btInserir then
   begin
@@ -125,6 +126,33 @@ begin
   else
   begin
     Produto.Alterar;
+  end;
+
+end;
+
+function TFrmCadProduto.ValidaCadastro: Boolean;
+begin
+  Result := True;
+
+  if Botao = btInserir then
+  begin
+    if trim(edtCodigo.Text) = '' then
+    begin
+      MessageDlg('Campo descrição é obrigatorio!', mtInformation, mbOKCancel,0);
+      Result := false;
+    end;
+
+    if not Produto.ValidaCodigoRepedito then
+    begin
+      MessageDlg('Codigo ja existente!', mtInformation, mbOKCancel,0);
+      Result := false;
+    end;
+  end;
+
+  if trim(edtDescricao.Text) = '' then
+  begin
+    MessageDlg('Campo descrição é obrigatorio!', mtInformation, mbOKCancel,0);
+    Result := false;
   end;
 
 end;

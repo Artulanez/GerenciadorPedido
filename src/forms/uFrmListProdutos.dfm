@@ -3,6 +3,15 @@ inherited FrmListProdutos: TFrmListProdutos
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  inherited PanelBotoes: TPanel
+    ExplicitLeft = -1
+    ExplicitTop = -6
+    inherited PanelEdit: TPanel
+      inherited ImgEdit: TImage
+        ExplicitLeft = 5
+      end
+    end
+  end
   inherited PanelFiltro: TPanel
     object Label1: TLabel [0]
       Left = 16

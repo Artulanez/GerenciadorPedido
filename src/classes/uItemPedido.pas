@@ -3,7 +3,7 @@ unit uItemPedido;
 interface
 
 uses uController, System.Types , Data.SqlExpr, System.Classes,
-  System.SysUtils, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  System.SysUtils, FireDAC.Stan.Intf, FireDAC.Stan.Option, uDM,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
@@ -31,7 +31,6 @@ type
 
     procedure Incluir();
     procedure Excluir();
-    procedure ExcluirTodos();
 
     constructor Create(AOwner: TComponent);
     destructor Destroy; override;
@@ -73,13 +72,6 @@ begin
                   ' AND COD_PRODUTO = '+QuotedStr(FCOD_PRODUTO) );
   SqlAux.ExecSQL();
 
-end;
-
-procedure TItemPedido.ExcluirTodos;
-begin
-  AtualizaDados;
-
-  Delete(self,'NUM_PEDIDO', IntToStr(FNUM_PEDIDO));
 end;
 
 procedure TItemPedido.Incluir;

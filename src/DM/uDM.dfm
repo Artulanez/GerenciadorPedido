@@ -5,19 +5,24 @@ object DM: TDM
   object SQLConnection: TFDConnection
     Params.Strings = (
       
-        'Database=C:\Projetos\Delphi\GerenciaPedidos\database\GERENCIAPED' +
+        'Database=D:\Projetos\Delphi\GerenciaPedidos\database\GERENCIAPED' +
         'IDOS.FDB'
       'Password=masterkey'
       'User_Name=SYSDBA'
       'DriverID=FB')
-    Connected = True
     LoginPrompt = False
-    Left = 224
-    Top = 24
+    Transaction = FDTransaction
+    Left = 88
+    Top = 32
   end
   object SqlAuxiliar: TFDQuery
     Connection = SQLConnection
-    Left = 224
-    Top = 80
+    Left = 232
+    Top = 32
+  end
+  object FDTransaction: TFDTransaction
+    Connection = SQLConnection
+    Left = 88
+    Top = 88
   end
 end

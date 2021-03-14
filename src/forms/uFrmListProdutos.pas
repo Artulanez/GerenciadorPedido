@@ -22,6 +22,7 @@ type
     procedure FormCreate(Sender: TObject);
 
     procedure AtualizaDadosGrid(Sender : TObject); Override;
+    procedure ImgExcClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,7 +43,7 @@ uses uDM;
 procedure TFrmListProdutos.AtualizaDadosGrid(Sender: TObject);
 begin
   inherited;
-  Produto.CODIGO := UpperCase(edtCodigo.Text);
+  Produto.CODIGO := edtCodigo.Text;
   Produto.CarregaDataSet(SQLQuery);
 end;
 
@@ -67,6 +68,14 @@ procedure TFrmListProdutos.FormCreate(Sender: TObject);
 begin
   inherited;
   Produto := TProduto.Create();
+end;
+
+procedure TFrmListProdutos.ImgExcClick(Sender: TObject);
+begin
+  inherited;
+  Produto.CODIGO := dsDados.DataSet.FieldByName('COD_PRODUTO').AsString;
+  Produto.Excluir;
+  AtualizaDadosGrid(Sender);
 end;
 
 end.

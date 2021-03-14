@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Caption = 'frmMain'
+  Caption = 'Gerenciar Pedido'
   ClientHeight = 231
   ClientWidth = 505
   Color = clBtnFace
@@ -10,16 +10,27 @@ object frmMain: TfrmMain
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
+  WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 13
-  object Button1: TButton
-    Left = 48
+  object MainMenu1: TMainMenu
+    Left = 248
     Top = 32
-    Width = 75
-    Height = 25
-    Caption = 'Produtos'
-    TabOrder = 0
-    OnClick = Button1Click
+    object Cadastros1: TMenuItem
+      Caption = 'Cadastros'
+      object Produtos1: TMenuItem
+        Caption = 'Produtos'
+        OnClick = Produtos1Click
+      end
+    end
+    object Pedido1: TMenuItem
+      Caption = 'Pedido'
+      object Manutenopedido1: TMenuItem
+        Caption = 'Manuten'#231#227'o pedido'
+        OnClick = Manutenopedido1Click
+      end
+    end
   end
 end

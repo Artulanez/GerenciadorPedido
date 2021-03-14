@@ -145,3 +145,10 @@ src/forms/Padrao/__history/uFrmListPadrao.dfm.~18~
 src/DM/__history/uDMConexao.dfm.~9~
 src/DM/__history/uDMConexao.dfm.~10~
 *.dcu
+_history/*
+src/classes/__history/*
+src/DM/__history/*
+src/forms/__history/*
+src/objetos/__history/*
+src/classes/__history/*
+src/forms/Padrao/__history/*

@@ -13,7 +13,9 @@ uses
   uFrmListPadrao in 'src\forms\Padrao\uFrmListPadrao.pas' {frmlistPadrao},
   uFrmCadPadrao in 'src\forms\Padrao\uFrmCadPadrao.pas' {FrmCadPadrao},
   uFrmListProdutos in 'src\forms\uFrmListProdutos.pas' {FrmListProdutos},
-  uFrmCadProduto in 'src\forms\uFrmCadProduto.pas' {FrmCadProduto};
+  uFrmCadProduto in 'src\forms\uFrmCadProduto.pas' {FrmCadProduto},
+  uFrmListPedido in 'src\forms\uFrmListPedido.pas' {FrmListPedido},
+  uFrmCadPedido in 'src\forms\uFrmCadPedido.pas' {FrmCadPedido};
 
 {$R *.res}
 
@@ -22,7 +24,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TDM, DM);
-  Application.CreateForm(TFrmListProdutos, FrmListProdutos);
-  Application.CreateForm(TFrmCadProduto, FrmCadProduto);
+  Application.CreateForm(TFrmCadPedido, FrmCadPedido);
   Application.Run;
 end.

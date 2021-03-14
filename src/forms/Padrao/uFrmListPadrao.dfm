@@ -1,6 +1,7 @@
 inherited frmlistPadrao: TfrmlistPadrao
-  ClientHeight = 417
-  ClientWidth = 705
+  BorderStyle = bsNone
+  ClientHeight = 456
+  ClientWidth = 721
   ExplicitWidth = 721
   ExplicitHeight = 456
   PixelsPerInch = 96
@@ -8,10 +9,11 @@ inherited frmlistPadrao: TfrmlistPadrao
   object PanelBotoes: TPanel
     Left = 0
     Top = 0
-    Width = 705
+    Width = 721
     Height = 47
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 705
     object PanelAdd: TPanel
       Left = 1
       Top = 1
@@ -224,7 +226,7 @@ inherited frmlistPadrao: TfrmlistPadrao
         OnMouseDown = ImgAddMouseDown
         OnMouseLeave = ImgAddMouseLeave
         OnMouseMove = ImgAddMouseMove
-        ExplicitLeft = -3
+        ExplicitLeft = 5
         ExplicitTop = -3
       end
     end
@@ -338,7 +340,7 @@ inherited frmlistPadrao: TfrmlistPadrao
         OnMouseDown = ImgAddMouseDown
         OnMouseLeave = ImgAddMouseLeave
         OnMouseMove = ImgAddMouseMove
-        ExplicitLeft = 5
+        ExplicitLeft = -3
         ExplicitTop = -3
       end
     end
@@ -446,15 +448,16 @@ inherited frmlistPadrao: TfrmlistPadrao
   object PanelFiltro: TPanel
     Left = 0
     Top = 47
-    Width = 705
+    Width = 721
     Height = 71
     Align = alTop
     TabOrder = 1
+    ExplicitWidth = 705
     DesignSize = (
-      705
+      721
       71)
     object BtnFiltrar: TBitBtn
-      Left = 614
+      Left = 630
       Top = 40
       Width = 78
       Height = 25
@@ -506,20 +509,23 @@ inherited frmlistPadrao: TfrmlistPadrao
         BFB8BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8
         BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8BFBFB8BF00}
       TabOrder = 0
+      ExplicitLeft = 614
     end
   end
   object PanelGrid: TPanel
     Left = 0
     Top = 118
-    Width = 705
-    Height = 299
+    Width = 721
+    Height = 338
     Align = alClient
     TabOrder = 2
+    ExplicitWidth = 705
+    ExplicitHeight = 299
   end
   object dsDados: TDataSource
     DataSet = SQLQuery
-    Left = 256
-    Top = 176
+    Left = 304
+    Top = 152
   end
   object SQLQuery: TFDQuery
     Left = 360

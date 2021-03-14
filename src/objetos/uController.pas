@@ -2,7 +2,7 @@ unit uController;
 
 interface
 
-uses uConexao,FireDAC.Stan.Intf, FireDAC.Stan.Option,
+uses uConexao,FireDAC.Stan.Intf, FireDAC.Stan.Option,System.StrUtils,uDM,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
@@ -15,7 +15,7 @@ TController = class(TConexao)
       Valores : Array of Variant;
       function ValidaCadastro() : boolean; virtual; abstract;
       function GetGenerator() : Integer;
-      function getConnection() : TFDConnection;
+      function GetConnection() : TFDConnection;
 
     public
       procedure Insert(Objeto: TConexao; vCampos : Array of String; vValores : Array of Variant);
@@ -27,7 +27,7 @@ implementation
 
 { TController }
 
-uses System.TypInfo, uDM, System.SysUtils, Vcl.Dialogs;
+uses System.TypInfo, System.SysUtils, Vcl.Dialogs;
 
 procedure TController.Delete(Objeto: TConexao; vChave, vValor: String);
 var
@@ -41,7 +41,9 @@ begin
       begin
         Close;
         SQL.Text := 'DELETE FROM ' +TABELA+
-                    ' WHERE '+vChave+' = '+vValor;
+                    ' WHERE '+vChave+' = :vChave';
+
+        ParamByName('vChave').Value := vValor;
         ExecSQL;
         MessageDlg('Dados Alterados com Sucesso.', mtInformation, [mbOk],0);
       end;
@@ -51,7 +53,7 @@ begin
   end;
 end;
 
-function TController.getConnection: TFDConnection;
+function TController.GetConnection: TFDConnection;
 begin
   Result := DM.SQLConnection;
 end;
@@ -110,9 +112,12 @@ end;
 procedure TController.Update(Objeto: TConexao; vCampos: array of String;
   vValores: array of Variant; vChave, vValor: String);
 var
-  i: Integer;
+  i, idx, countparams: Integer;
+  AddVirgura :Boolean;
 begin
   try
+    AddVirgura := false;
+
     with DM.SqlAuxiliar do
     begin
       Close;
@@ -121,18 +126,31 @@ begin
 
       for i := Low(vCampos) to High(vCampos) do
       begin
-        if i > 0 then
-          SQL.Add(',');
 
-        SQL.Add(vCampos[i]+'= :'+vCampos[i]);
+        if vCampos[i] <> vChave then
+        begin
+
+          if AddVirgura  then
+            SQL.Add(',');
+
+          SQL.Add(vCampos[i]+'= :'+vCampos[i]);
+
+          AddVirgura := true;
+        end;
+
       end;
 
-      SQL.Add('  WHERE '+vChave+' ='+ vValor);
+      SQL.Add('  WHERE '+vChave+' = :vChave');
 
-      for i := Low(vValores) to High(vValores) do
+
+      countparams := Params.Count;
+      for I := 0 to countparams -2 do
       begin
-        Params[i].Value := vValores[i];
+        idx := IndexStr(Params[i].Name, vCampos);
+        Params[i].Value := vValores[idx];
       end;
+
+      ParamByName('vChave').Value := vValor;
 
       ExecSQL;
 

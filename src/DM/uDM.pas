@@ -14,6 +14,7 @@ type
   TDM = class(TDataModule)
     SQLConnection: TFDConnection;
     SqlAuxiliar: TFDQuery;
+    FDTransaction: TFDTransaction;
   private
     { Private declarations }
   public
